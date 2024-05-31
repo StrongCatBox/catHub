@@ -1,0 +1,49 @@
+<!-- header.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votre titre</title>
+    <!-- Lien vers Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+            /* Fond noir */
+            color: white;
+            /* Texte blanc */
+        }
+
+        .navbar {
+            background-color: #CA1551;
+            height: 200px;
+            /* Fond de la barre de navigation gris foncé */
+        }
+
+        .navbar-brand img {
+            max-height: 400px;
+            padding-top: 20px;
+            /* Ajuster la hauteur du logo */
+        }
+
+        .navbar-brand {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="/static/kittylogo.png" alt="Votre Logo">
+            </a>
+        </div>
+    </nav>
+</body>
+
+</html>

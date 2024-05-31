@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Races de chats</title>
+    <!-- Lien vers Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+            /* Fond noir */
+            color: white;
+            /* Texte blanc */
+        }
+
+        .card {
+            background-color: #333;
+            /* Fond de la carte gris foncé */
+            color: white;
+            /* Texte blanc */
+            margin-bottom: 20px;
+            /* Espace entre les cartes en hauteur */
+        }
+
+        .card-header {
+            background-color: #141313;
+            /* Fond de l'en-tête de la carte gris moyen */
+            color: rgb(0, 0, 0);
+            /* Texte blanc */
+
+        }
+
+        .card-header:first-child {
+            background-color: rgb(70, 70, 70);
+            color: white;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            background-color: black;
+        }
+
+        .card-body p {
+            flex-grow: 1;
+        }
+
+        .row {
+            margin-bottom: 40px;
+            /* Marge entre les lignes */
+        }
+    </style>
+</head>
+
+<body>
+
+    {% include 'header.html' %}
+
+
+
+    <div class="container">
+        <h1 class="my-5" style="text-align: center;">Liste des races de chats</h1>
+        {% for chunk in cats|batch(3) %}
+        <div class="row">
+            {% for cat in chunk %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h2 class="card-title">{{ cat[1] }}</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{ cat[2] }}</p>
+                        <img src="{{ cat[3] }}" class="card-img-top" alt="{{ cat[1] }}">
+                        <ul class="list-group list-group-flush" style="color: black;">
+                            <li class="list-group-item"><strong>Pays d'origine:</strong> {{ cat['origin'] }}</li>
+                            <li class="list-group-item"><strong>Tempérament:</strong> {{ cat['temperament'] }}</li>
+                            <li class="list-group-item"><strong>Espérance de vie:</strong> {{ cat['life_span'] }}</li>
+                        </ul>
+                        <div class="card-body mt-auto">
+                            <a href="{{ cat['wikipedia_url'] }}" class="card-link">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>
