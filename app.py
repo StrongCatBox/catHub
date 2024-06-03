@@ -42,18 +42,28 @@ def update_database():
                      id INTEGER PRIMARY KEY,
                      name TEXT,
                      description TEXT,
-                     image_url TEXT
+                     image_url TEXT,
+                     origin TEXT,
+                     temperament TEXT,
+                     life_span TEXT
                      )''')
         for cat in data:
             image_id = cat.get('reference_image_id', '')  # Récupérer l'identifiant de l'image
             image_url = get_image_url(image_id) if image_id else ''  # Former l'URL de l'image
-            c.execute("INSERT INTO cats (name, description, image_url) VALUES (?, ?, ?)",
-                      (cat['name'], cat.get('description', ''), image_url))
+            name = cat['name']
+            description = cat.get('description', '')
+            origin = cat.get('origin', '')
+            temperament = cat.get('temperament', '')
+            life_span = cat.get('life_span', '')
+
+            c.execute("INSERT INTO cats (name, description, image_url, origin, temperament, life_span) VALUES (?, ?, ?, ?, ?, ?)",
+                      (name, description, image_url, origin, temperament, life_span))
         conn.commit()
         conn.close()
         return "Database updated successfully"
     else:
         return "Failed to update database"
+
 
 # Fonction pour récupérer les données des races de chats depuis la base de données
 def get_cats_from_database():
@@ -86,7 +96,10 @@ def init_db():
             id INTEGER PRIMARY KEY,
             name TEXT,
             description TEXT,
-            image_url TEXT
+            image_url TEXT,
+            origin TEXT,
+            temperament TEXT,
+            life_span TEXT
         )
     ''')
     conn.commit()
